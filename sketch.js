@@ -1,10 +1,12 @@
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
 var engine, world;
 var box1, pig1;
-var backgroundIMG
+var backgroundIMG;
+var constraintLog, spring;
 
 function preload() {
     backgroundIMG = loadImage("sprites/bg.png");
@@ -14,7 +16,6 @@ function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
-
     
     ground = new Ground(600,height,1200,20)
 
@@ -35,6 +36,9 @@ function setup(){
 
     bird = new Bird(100,100);
 
+    constraintLog = new Log(230,180,80,PI / 2);
+
+    spring = new Spring(bird.body, constraintLog.body);
 }
 
 function draw(){
@@ -59,4 +63,7 @@ function draw(){
     log5.display();
 
     bird.display();
+
+    constraintLog.display();
+    spring.display();
 }
